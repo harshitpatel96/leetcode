@@ -22,5 +22,3 @@ class Solution:
                     degZeroNodes.append(child)
         
         return topologicalOrder if len(topologicalOrder) == len(G) else []
-        
-        return self.topologicalSort(G, inDegrees)
