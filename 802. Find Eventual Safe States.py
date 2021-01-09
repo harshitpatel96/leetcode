@@ -1,3 +1,4 @@
+# Using DFS
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
         n = len(graph)
@@ -28,3 +29,30 @@ class Solution:
             if safe[node]: safenodes.append(node)
                 
         return safenodes
+    
+    # Using Kahn's peel off algorithm topological sort
+    class Solution:
+        def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+            n = len(graph)
+            rgraph = [[] for _ in range(n)]
+            for node in range(n):
+                for child in graph[node]:
+                    rgraph[child].append(node)
+
+            outDegrees = [0]*n
+            terminals = []
+            for node in range(n):
+                outDegrees[node] = len(graph[node])
+                if outDegrees[node] == 0:
+                    terminals.append(node)
+
+            safenodes = [False]*n
+            while terminals:
+                node = terminals.pop()
+                safenodes[node] = True
+                for parent in rgraph[node]:
+                    outDegrees[parent] -= 1
+                    if outDegrees[parent] == 0:
+                        terminals.append(parent)
+
+            return [idx for idx, val in enumerate(safenodes) if val]
