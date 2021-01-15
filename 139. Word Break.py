@@ -27,3 +27,23 @@ class Solution:
             
             self.memo[s] = False # if all prefixes fail return False and save to memo
         return False
+
+    
+    # Slower solution
+    class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        self.words = set(wordDict)
+        self.memo = {}
+        return self.dfs(s)
+        
+    def dfs(self, s):
+        if s in self.memo: return self.memo[s]
+        if s in self.words: return True
+        result = False
+        for i in range(1, len(s)):
+            result = self.dfs(s[:i]) and self.dfs(s[i:])
+            if result:
+                self.memo[s] = True
+                return True
+        self.memo[s] = False
+        return False
