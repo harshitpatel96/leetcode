@@ -4,7 +4,6 @@ class Solution:
         allCombs = []
         currComb = []
         n = len(word)
-        counter = 0
         # noNum flag is used to make sure we do not use two nums in succession
         def backtrack(start, noNum): 
             if start == n: # 0, 1
@@ -26,5 +25,4 @@ class Solution:
                     currComb.pop()
                     
         backtrack(0, False)
-        print(counter)
         return allCombs
