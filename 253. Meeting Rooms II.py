@@ -14,7 +14,6 @@ class Solution:
                 heappop(heap)
             heappush(heap, end)
             hlen += 1
-            print(hlen, len(heap))
             numRooms = max(numRooms, hlen)
         
         return numRooms
