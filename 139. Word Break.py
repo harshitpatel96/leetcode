@@ -47,3 +47,19 @@ class Solution:
                 return True
         self.memo[s] = False
         return False
+    
+   
+# Tabulation
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        #leetcode
+        n = len(s)
+        DP = [False]*(n+1)
+        DP[n] = True
+        for i in range(n-1, -1, -1):
+            for w in wordDict:
+                isPrefix = i + len(w) <= n and w == s[i:i+len(w)]
+                if isPrefix and DP[i+len(w)]: 
+                    DP[i] = True
+                    break
+        return DP[0]
